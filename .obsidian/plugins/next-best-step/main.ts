@@ -9,7 +9,10 @@ import {
     RequestUrlParam,
     RequestUrlResponse,
     requestUrl,
-    Setting } from 'obsidian';
+    Setting, 
+    TAbstractFile, 
+    TFile,
+    TFolder} from 'obsidian';
 import { SimpleGreeting } from './SimpleGreeting.js';
 //import './SimpleGreeting.js';
 
@@ -91,33 +94,99 @@ export default class MyPlugin extends Plugin {
 			name: 'Sync Jira Issues',
 			callback: async() => {
 				console.log('>> Sync Jira Issues');
-                console.log('authorization: ' + this.settings.authorization);
-                console.log('token: ' + this.settings.token);
-                console.log('atlassianHost: ' + this.settings.atlassianHost);
-                console.log('boardId: ' + this.settings.boardId);
+                //console.log('authorization: ' + this.settings.authorization);
+                //console.log('token: ' + this.settings.token);
+                //console.log('atlassianHost: ' + this.settings.atlassianHost);
+                //console.log('boardId: ' + this.settings.boardId);
 
-                // Get issues for board
-                
-                const options: RequestUrlParam = {
-                    url: `https://${this.settings.atlassianHost}/rest/agile/1.0/board/${this.settings.boardId}/issue?jql=${this.settings.jql}`,
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': this.settings.authorization,
-                        'Cookie': this.settings.token
-                    },
-                    //body: json
-                };
-                
-                var response: RequestUrlResponse;
-                
-                try {
-                    response = await requestUrl(options);
-                    console.log(response.text);
-                    //return response.text;
-                } catch(e) {
-                    console.log(JSON.stringify(e))
+                // First, we need to get all markdown documents from the open tasks directory
+                // For each markdown document, we need to keep only those that have a jiraKey because for Jira sync, 
+                // we care only about those that came from Jira.
+                // Next, we need to get all the issues from Jira
+                // CLOSE TASKS
+                // First we need to make a pass checking all the jira issues from markdown documents against those we got from Jira
+                // If we find a markdown document with a Jira key that's not in the JSON response from Jira, we need to move that markdown document to the closed tasks directory
+                // CREATE NEW TASKS
+                // Next we need to make a pass checking all the issues from Jira against those we already have markdown documents for
+                // If we find an issue from Jira that's not in the markdown documents, we need to create a new markdown document for that issue
+                // UPDATE EXISTING TASKS
+                // Next we need to make a pass checking all the issues from Jira against those we already have markdown documents for
+                // If we find an issue from Jira that's in the markdown documents, we need to update the markdown document with the latest information from Jira
+
+                // First, we need to get all markdown documents from the open tasks directory in the obsidian vault
+                let jiraTaskDocuments: TFile[] = [];
+                const openTasksFolder: TAbstractFile = this.app.vault.getAbstractFileByPath('2 Areas/Tasks/Tasks-Open');
+                if (openTasksFolder instanceof TFolder) {
+
+                    // Recurse all the markdown files in the open tasks folder
+                    
+                    const openTasksFolderChildren = openTasksFolder.children;
+                    openTasksFolderChildren.forEach(childFile => {
+                        if (childFile instanceof TFile) {
+                            // For each markdown document, we need to keep only those that have a jiraKey because for Jira sync
+                            // we care only about those that came from Jira.
+                            const docMeta = this.app.metadataCache.getFileCache(childFile);
+                            if (docMeta.frontmatter?.jiraKey) {
+                                jiraTaskDocuments.push(childFile);
+                                //console.log(`Has jiraKey: ${docMeta.frontmatter.jiraKey} > ${childFile.basename}`);
+                            }
+                        }
+                    });
+                    // This is just for debugging to prove that what we have saved in jiraTaskDocuments is correct
+                    // jiraTaskDocuments.forEach(jiraTaskDoc => {
+                    //     const docMeta = this.app.metadataCache.getFileCache(jiraTaskDoc);
+                    //     console.log(`Has jiraKey: ${docMeta.frontmatter.jiraKey} > ${jiraTaskDoc.basename}`);
+                    // });
+
+                    // Next, we need to get all the issues from Jira
+
+                    // Get issues for board
+                    const options: RequestUrlParam = {
+                        url: `https://${this.settings.atlassianHost}/rest/agile/1.0/board/${this.settings.boardId}/issue?jql=${this.settings.jql}&fields=created,summary,customfield_10036`,
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Authorization': this.settings.authorization,
+                            'Cookie': this.settings.token
+                        },
+                        //body: json
+                    };
+
+                    console.log(`>> Sync Jira issues > url: ${options.url}`)
+                    
+                    var response: RequestUrlResponse;
+
+                    try {
+                        response = await requestUrl(options);
+                        // console.log(response.text);
+                        const parsedResponse = JSON.parse(response.text);
+                        console.log(`>> Sync Jira issues > syncing ${parsedResponse.total} issues.`);
+
+                        // CLOSE TASKS -----------------------------------------------------------------------------------------------------------------------------------------------------
+                        // First we need to make a pass checking all the jira issues from markdown documents against those we got from Jira
+                        // If we find a markdown document with a Jira key that's not in the JSON response from Jira, we need to move that markdown document to the closed tasks directory
+                        jiraTaskDocuments.forEach(jiraTaskDoc => {
+                            // console.log('-- Checking Jira task doc: %s', jiraTaskDoc.basename );
+                            const docMeta = this.app.metadataCache.getFileCache(jiraTaskDoc);
+                            let exists = parsedResponse.issues.some((parsedIssue: { key: string; }) => parsedIssue.key === docMeta.frontmatter.jiraKey);
+                            if( ! exists ) {
+                                console.log("Open issues does not contain: " + docMeta.frontmatter.jiraKey + " > moving to Tasks-Closed > " + jiraTaskDoc.basename);
+                                //...move that markdown document to the closed tasks directory
+                                this.app.fileManager.renameFile(jiraTaskDoc, '2 Areas/Tasks/Tasks-Closed/' + jiraTaskDoc.name);
+                            }
+                        });
+                        // ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                        //return response.text;
+                    } catch(e) {
+                        console.log(JSON.stringify(e))
+                    }
+
+
+                } else {
+                    console.log('openTasksFolder is not a folder');
                 }
+
 
             }
 		});
@@ -136,7 +205,6 @@ export default class MyPlugin extends Plugin {
 	}
 
 	onunload() {
-
 	}
 
 	async loadSettings() {
