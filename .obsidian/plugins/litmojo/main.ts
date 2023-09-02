@@ -58,9 +58,7 @@ export default class MyPlugin extends Plugin {
 		});
 
 
-		this.addRibbonIcon("dice", "Activate view", () => {
-			this.activateView();
-		});
+
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon(
@@ -264,19 +262,6 @@ export default class MyPlugin extends Plugin {
 
 	async saveSettings() {
 		await this.saveData(this.settings);
-	}
-
-	async activateView() {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE_EXAMPLE);
-
-		await this.app.workspace.getRightLeaf(false).setViewState({
-			type: VIEW_TYPE_EXAMPLE,
-			active: true,
-		});
-
-		this.app.workspace.revealLeaf(
-			this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
-		);
 	}
 
     async createAndOpenLitMojo(): Promise<string> {
