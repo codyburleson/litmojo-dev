@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "36250da7fd4c109a",
+        "id": "80d5cda246317a60",
         "type": "tabs",
         "children": [
           {
-            "id": "e94706c4a3161c1f",
+            "id": "4cbd57f78d3839dd",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -118,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Example 23-09-02 10.05.04.litmojo"
-              }
+              "state": {}
             }
           },
           {
@@ -146,21 +144,23 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "litmojo:Create New Example File": false,
-      "litmojo:Activate view": false,
       "litmojo:Sample Plugin": false
     }
   },
   "active": "7b9a0119d725d432",
   "lastOpenFiles": [
+    "Manuscripts/Test Manuscript A/Test Manuscript A.litmojo",
+    "JIRA REST API.md",
+    "Test Manuscript A.litmojo",
+    "Example 23-09-02 10.22.23.litmojo",
     "Example 23-09-02 10.05.04.litmojo",
+    "Manuscripts/Test Manuscript A",
+    "Manuscripts",
     "Example 23-09-02 10.04.14.example",
     "Example 23-09-02 10.04.04.example",
     "Example 23-09-02 10.03.50.example",
     "Example 23-09-02 10.00.41.example",
-    "Example 23-09-02 09.56.35.example",
     "README.md",
-    "JIRA REST API.md",
     "2 Areas/Tasks - Copy (3)/Tasks-Open/Deploy and Test Auth Access Control in Prod.md",
     "2 Areas/Tasks - Copy (3)/Tasks-Open/Dealer Admin - Change text in notification body.md",
     "2 Areas/Tasks - Copy (3)/Tasks-Open/Cutover Requests Handler.md",
@@ -184,7 +184,6 @@
     "2 Areas/Tasks/Tasks-Open/Obtain all Brand SVGs.md",
     "2 Areas/Tasks/Tasks-Closed/Notification Service imposes unacceptably slow startup time in Pero.md",
     "2 Areas/Tasks/Tasks-Closed/Need to estimate Customer Satisfaction Survey Tool need to send specified brand when dual branded Case-Case IH Steyr-Case IH.md",
-    "2 Areas/Tasks - Copy (5)/Tasks-Open/CNH-11376 UK_Ernest Doe dealer admin can't approve",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230704113803.png",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230704113751.png",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230517202751.png",
@@ -192,10 +191,6 @@
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230517202019.png",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230503090026.png",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230305124925.png",
-    "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments",
-    "2 Areas/Tasks - Copy (5)/Tasks-Open",
-    "2 Areas/Tasks - Copy (5)/Tasks-Closed",
-    "2 Areas/Tasks - Copy (5)",
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230704113751.png",
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230704113803.png",
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230517202751.png"
