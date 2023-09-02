@@ -16,12 +16,12 @@ import {
 } from "obsidian";
 import { ICON_NAME, FILE_EXTENSION } from './constants';
 import { sendNotice } from './utils/notice';
-import { SimpleGreeting } from "./SimpleGreeting.js";
+import { SimpleGreeting } from "./SimpleGreeting";
 import { DEFAULT_DATA } from './ExampleView';
 
 import { ExampleView, VIEW_TYPE_EXAMPLE } from "./ExampleView.js";
 
-//import './SimpleGreeting.js';
+
 
 // Remember to rename these classes and interfaces!
 

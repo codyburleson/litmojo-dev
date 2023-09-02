@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "048c2ec194d6e1ce",
+        "id": "36250da7fd4c109a",
         "type": "tabs",
         "children": [
           {
-            "id": "0faa0b92246d38a7",
+            "id": "e94706c4a3161c1f",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -118,7 +118,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Example 23-09-02 10.05.04.litmojo"
+              }
             }
           },
           {
@@ -149,8 +151,13 @@
       "litmojo:Sample Plugin": false
     }
   },
-  "active": "0faa0b92246d38a7",
+  "active": "7b9a0119d725d432",
   "lastOpenFiles": [
+    "Example 23-09-02 10.05.04.litmojo",
+    "Example 23-09-02 10.04.14.example",
+    "Example 23-09-02 10.04.04.example",
+    "Example 23-09-02 10.03.50.example",
+    "Example 23-09-02 10.00.41.example",
     "Example 23-09-02 09.56.35.example",
     "README.md",
     "JIRA REST API.md",
@@ -189,12 +196,8 @@
     "2 Areas/Tasks - Copy (5)/Tasks-Open",
     "2 Areas/Tasks - Copy (5)/Tasks-Closed",
     "2 Areas/Tasks - Copy (5)",
-    "2 Areas/Tasks - Copy (4)/Tasks-Open/CNH-11376 UK_Ernest Doe dealer admin can't approve",
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230704113751.png",
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230704113803.png",
-    "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230517202751.png",
-    "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments",
-    "2 Areas/Tasks - Copy (4)/Tasks-Open",
-    "2 Areas/Tasks - Copy (4)/Tasks-Closed"
+    "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230517202751.png"
   ]
 }
