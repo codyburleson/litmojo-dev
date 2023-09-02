@@ -14,14 +14,12 @@ import {
 	TFile,
 	TFolder,
 } from "obsidian";
-import { ICON_NAME, FILE_EXTENSION } from './constants';
-import { sendNotice } from './utils/notice';
+import { ICON_NAME, FILE_EXTENSION } from "./constants";
+import { sendNotice } from "./utils/notice";
 import { SimpleGreeting } from "./SimpleGreeting";
-import { DEFAULT_DATA } from './ExampleView';
+import { DEFAULT_DATA } from "./ExampleView";
 
 import { ExampleView, VIEW_TYPE_EXAMPLE } from "./ExampleView.js";
-
-
 
 // Remember to rename these classes and interfaces!
 
@@ -47,18 +45,44 @@ export default class MyPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-        this.registerView(
-			VIEW_TYPE_EXAMPLE,
-			(leaf) => new ExampleView(leaf)
+		this.registerView(VIEW_TYPE_EXAMPLE, (leaf) => new ExampleView(leaf));
+		this.registerExtensions([FILE_EXTENSION], VIEW_TYPE_EXAMPLE);
+
+		/**
+		 * Registers the Compile menu, which should really only show up when there is a
+		 * folder page with a litmojo compile config in the YAML frontmatter.
+		 */
+		this.registerEvent(
+			this.app.workspace.on("file-menu", (menu, file) => {
+				if (file instanceof TFile) {
+					/*
+                    menu.addItem((item) => {
+                        item
+                            .setTitle("Publish")
+                            .setIcon("paper-plane")
+                            .onClick(async () => {
+                                new Notice(file.path);
+                            });
+                    });
+                    */
+				} else if (file instanceof TFolder) {
+					menu.addItem((item) => {
+						item.setTitle("LitMojo")
+							.setIcon(ICON_NAME)
+							.onClick(async () => {
+								// ====================================================================================
+								// LOAD COMPILE SETTINGS FROM FOLDER NOTE
+								// ====================================================================================
+                                
+                                this.createOrOpenLitMojoConfig(file);
+								
+
+								// open the editor view here instead
+							});
+					});
+				}
+			})
 		);
-        this.registerExtensions([FILE_EXTENSION], VIEW_TYPE_EXAMPLE);
-
-        this.addRibbonIcon(ICON_NAME, "Create New Example File", async (e) => {
-			this.createAndOpenLitMojo();
-		});
-
-
-
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon(
@@ -247,7 +271,7 @@ export default class MyPlugin extends Plugin {
 			window.setInterval(() => console.log("setInterval"), 5 * 60 * 1000)
 		);
 
-        sendNotice('LitMojo Plugin loaded!');
+		sendNotice("LitMojo Plugin loaded!");
 	}
 
 	onunload() {}
@@ -264,29 +288,90 @@ export default class MyPlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 
-    async createAndOpenLitMojo(): Promise<string> {
-		this.app.workspace.detachLeavesOfType(VIEW_TYPE_EXAMPLE);
+	async createOrOpenLitMojoConfig(parentFolder:TFolder): Promise<string> {
 
-		const file = await this.app.vault.create(`Example ${window.moment().format('YY-MM-DD hh.mm.ss')}.${FILE_EXTENSION}`, DEFAULT_DATA);
+        console.log('>> createOrOpenLitMojoConfig() > parentFolder.path: %s', parentFolder.path);
+        console.log('>> createOrOpenLitMojoConfig() > parentFolder.name: %s', parentFolder.name);
 
-		const leaf = this.app.workspace.getLeaf('tab');
+        this.app.workspace.detachLeavesOfType(VIEW_TYPE_EXAMPLE);
 
-		await leaf.openFile(file, { active: true });
+        // First we need to check whether or not the parent folder already has a litmojo config file
+        // If it does, we need to open it
+        // If it does not, we need to create it
 
-		leaf.setViewState({
-			type: VIEW_TYPE_EXAMPLE,
-			state: leaf.view.getState(),
-		});
+        // Check for existing litmojo config file
+        let litmojoConfigFile: TFile | null = null;
+        const parentFolderChildren = parentFolder.children;
+        parentFolderChildren.forEach((childFile) => {
+            if (childFile instanceof TFile) {
+                if (childFile.name === parentFolder.name + '.litmojo') {
+                    litmojoConfigFile = childFile;
+                }
+            }
+        });
 
-		this.app.workspace.revealLeaf(
-			this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
-		);
+        if(litmojoConfigFile) {
+            console.log('litmojo config file already exists');
+        } else {
 
-		return file.path;
+            const file = await this.app.vault.create(
+                        `${parentFolder.path}/${parentFolder.name}.${FILE_EXTENSION}`,
+                        DEFAULT_DATA
+                );
 
+            const leaf = this.app.workspace.getLeaf("tab");
+
+            await leaf.openFile(file, { active: true });
+
+            leaf.setViewState({
+                type: VIEW_TYPE_EXAMPLE,
+                state: leaf.view.getState(),
+            });
+
+            this.app.workspace.revealLeaf(
+                this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
+            );
+
+            return file.path;
+
+        }
+
+        // if (litmojoConfigFile) {
+        //     // Open the existing litmojo config file
+        //     console.log('>> createOrOpenLitMojoConfig() > opening existing litmojo config file: %s', litmojoConfigFile.path);
+        //     const leaf = this.app.workspace.getLeaf("tab");
+        //     await leaf.openFile(litmojoConfigFile, { active: true });
+        //     leaf.setViewState({
+        //         type: VIEW_TYPE_EXAMPLE,
+        //         state: leaf.view.getState(),
+        //     });
+        //     this.app.workspace.revealLeaf(
+        //         this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
+        //     );
+        //     return litmojoConfigFile.path;
+        // } else {
+        //     // Create a new litmojo config file
+        //     console.log('>> createOrOpenLitMojoConfig() > creating new litmojo config file');
+        //     const file = await this.app.vault.create(
+        //         `${parentFolder.name}.litmojo`,
+        //         DEFAULT_DATA
+        //     );
+        //     const leaf = this.app.workspace.getLeaf("tab");
+        //     await leaf.openFile(file, { active: true });
+        //     leaf.setViewState({
+        //         type: VIEW_TYPE_EXAMPLE,
+        //         state: leaf.view.getState(),
+        //     });
+        //     this.app.workspace.revealLeaf(
+        //         this.app.workspace.getLeavesOfType(VIEW_TYPE_EXAMPLE)[0]
+        //     );
+        //     return file.path;
+        // }
+
+
+
+		
 	}
-
-
 }
 
 class SampleModal extends Modal {
