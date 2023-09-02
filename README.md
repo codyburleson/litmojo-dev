@@ -1,4 +1,4 @@
-Welcome to the LitMojo Dev vault!
+Sample Editor CommandSample Editor CommandWelcome to the LitMojo Dev vault!
 
 This Obsidian vault contains test documents and, in the ``.obsidian/plugins` folder, the litmojo plugin source code.
 

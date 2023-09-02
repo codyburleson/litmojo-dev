@@ -4,29 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "bbd61ed314368efc",
+        "id": "048c2ec194d6e1ce",
         "type": "tabs",
         "children": [
           {
-            "id": "9bd0c6dfae87d4ee",
+            "id": "0faa0b92246d38a7",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0f47d657c58d7d50",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.3.7"
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -79,7 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 320.5
+    "width": 379.5
   },
   "right": {
     "id": "cb6d1a1adf8010b6",
@@ -95,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -112,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,18 +118,23 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "README.md"
-              }
+              "state": {}
+            }
+          },
+          {
+            "id": "7b75bd46596e23ee",
+            "type": "leaf",
+            "state": {
+              "type": "example-view",
+              "state": {}
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 335.5,
-    "collapsed": true
+    "width": 493.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -155,11 +144,16 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "next-best-step:Sample Plugin": false
+      "litmojo:Create New Example File": false,
+      "litmojo:Activate view": false,
+      "litmojo:Sample Plugin": false
     }
   },
-  "active": "9bd0c6dfae87d4ee",
+  "active": "0faa0b92246d38a7",
   "lastOpenFiles": [
+    "Example 23-09-02 09.56.35.example",
+    "README.md",
+    "JIRA REST API.md",
     "2 Areas/Tasks - Copy (3)/Tasks-Open/Deploy and Test Auth Access Control in Prod.md",
     "2 Areas/Tasks - Copy (3)/Tasks-Open/Dealer Admin - Change text in notification body.md",
     "2 Areas/Tasks - Copy (3)/Tasks-Open/Cutover Requests Handler.md",
@@ -183,9 +177,6 @@
     "2 Areas/Tasks/Tasks-Open/Obtain all Brand SVGs.md",
     "2 Areas/Tasks/Tasks-Closed/Notification Service imposes unacceptably slow startup time in Pero.md",
     "2 Areas/Tasks/Tasks-Closed/Need to estimate Customer Satisfaction Survey Tool need to send specified brand when dual branded Case-Case IH Steyr-Case IH.md",
-    "2 Areas/Tasks/Tasks-Closed/Move nova-utils.js to akamai and reference from theme instead of WCM.md",
-    "2 Areas/Tasks/Tasks-Open/Finalize CDFS Dealer Admin Workflow specification and obtain approval.md",
-    "2 Areas/Tasks/Tasks-Open/Fill dirt into the gulley that was cut two rainy seasons ago.md",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/CNH-11376 UK_Ernest Doe dealer admin can't approve",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230704113803.png",
     "2 Areas/Tasks - Copy (5)/Tasks-Open/attachments/Pasted image 20230704113751.png",
@@ -204,7 +195,6 @@
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments/Pasted image 20230517202751.png",
     "2 Areas/Tasks - Copy (4)/Tasks-Open/attachments",
     "2 Areas/Tasks - Copy (4)/Tasks-Open",
-    "2 Areas/Tasks - Copy (4)/Tasks-Closed",
-    "2 Areas/Tasks - Copy (4)"
+    "2 Areas/Tasks - Copy (4)/Tasks-Closed"
   ]
 }

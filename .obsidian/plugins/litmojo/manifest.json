@@ -1,0 +1,11 @@
+{
+	"id": "litmojo",
+	"name": "LitMojo",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Useful tools for serious writers.",
+	"author": "Obsidian",
+	"authorUrl": "https://codyburleson.com",
+	"fundingUrl": "https://www.buymeacoffee.com/cburleson",
+	"isDesktopOnly": false
+}
