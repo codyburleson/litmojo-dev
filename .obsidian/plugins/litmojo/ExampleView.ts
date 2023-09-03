@@ -3,7 +3,6 @@ import { TFile, TextFileView, WorkspaceLeaf } from "obsidian";
 //import { createRoot, Root } from "react-dom/client";
 import { sendNotice } from "./utils/notice";
 //import CustomViewContent from './components/CustomViewContent';
-import { SimpleGreeting } from "./SimpleGreeting.js";
 import { NavBar } from "components/NavBar";
 
 import { LitElement } from "lit";
@@ -96,11 +95,13 @@ export class ExampleView extends TextFileView {
 		const { containerEl } = this;
 
 		containerEl.empty();
+        
 
-		let navBar: NavBar = containerEl.createEl("litmojo-navbar");
+		//let navBar: NavBar = containerEl.createEl("litmojo-navbar");
+        
+
+        const navBar: NavBar = containerEl.createEl("litmojo-navbar", {});
         navBar.name = file.basename;
-
-        //
 
         // let navBar: NavBar = new NavBar();
         // navBar.name = "Cody";

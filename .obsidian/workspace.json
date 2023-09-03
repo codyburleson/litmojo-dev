@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "80d5cda246317a60",
+        "id": "09a30904d35ac692",
         "type": "tabs",
         "children": [
           {
-            "id": "4cbd57f78d3839dd",
+            "id": "e2af12f718aae5c4",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -118,7 +118,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Manuscripts/Test Manuscript A/Test Manuscript A.litmojo"
+              }
             }
           },
           {

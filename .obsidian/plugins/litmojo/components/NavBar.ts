@@ -19,16 +19,12 @@ export class NavBar extends LitElement {
       }
 
 	render() {
-		console.log(">> NavBVar.render()");
+		console.log(">> NavBar.render()");
 		return html`<p>Hello, ${this.name}!</p>`;
 	}
 }
 
-
 customElements.get("litmojo-navbar") || customElements.define("litmojo-navbar", NavBar);
-// if (!customElements.get('litmojo-navbar')) {
-//     customElements.define('litmojo-navbar', NavBar);
-// }
 
 // Lit Element recommends adding an HTMLElementTagNameMap entry for all elements authored in TypeScript,
 // and ensuring you publish your .d.ts typings in your npm package.

@@ -16,8 +16,8 @@ import {
 } from "obsidian";
 import { ICON_NAME, FILE_EXTENSION } from "./constants";
 import { sendNotice } from "./utils/notice";
-import { SimpleGreeting } from "./SimpleGreeting";
 import { DEFAULT_DATA } from "./ExampleView";
+import { NavBar } from "./components/NavBar";
 
 import { ExampleView, VIEW_TYPE_EXAMPLE } from "./ExampleView.js";
 
@@ -47,6 +47,9 @@ export default class MyPlugin extends Plugin {
 
 		this.registerView(VIEW_TYPE_EXAMPLE, (leaf) => new ExampleView(leaf));
 		this.registerExtensions([FILE_EXTENSION], VIEW_TYPE_EXAMPLE);
+
+        
+        customElements.get("litmojo-navbar") || customElements.define("litmojo-navbar", NavBar);
 
 		/**
 		 * Registers the Compile menu, which should really only show up when there is a
@@ -402,10 +405,6 @@ class SampleSettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 
 		containerEl.empty();
-
-		const simple: SimpleGreeting = containerEl.createEl("simple-greeting", {
-			text: "Simple Greeting Component!",
-		});
 
 		const h2 = containerEl.createEl("h2", {
 			text: "Next Best Step Settinngs",
